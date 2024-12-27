@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="shortcut icon" type="image/png" href="static/Assets/favicon-32x32.png">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> Readable </title>
+    <link rel="stylesheet" href="static\Search.css">
+    <!-- Animation library --> 
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+</head>
+<body>
+    <form method = "POST" action = "/editSearch">
+        <label for = "title" class = "title_header">Title</label>
+        <input type = "text" placeholder="Insert Title" name = "title" id = "title" required maxlength="35">
+        <label for = "description" class = "description_header">Description</label>
+        <textarea type = "text" placeholder="Description (Optional)" name = "description" id = "description" maxlength="150"></textarea>
+        <input class = "edit_submit" type = "submit" value = "Begin Search">
+    </form>
+    <a href = "/newSearch" class = "cancel_sign">Cancel</a>
+    <!-- Library scripts -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+        });
+    </script>
+</body>
+</html>

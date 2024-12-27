@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="shortcut icon" type="image/png" href="static/Assets/favicon-32x32.png">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> Readable </title>
+    <link rel="stylesheet" href="static\Search.css">
+    <!-- Animation library --> 
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+</head>
+<body>
+    <form method = "POST" action = "/pasteText">        
+        <label for = "title" class = "title_header">Paste Text</label>
+        <input type = "text" placeholder="Insert Title" name = "title" id = "title" required maxlength="22">
+        <textarea type = "text" placeholder="Paste Here" name = "pasted_text" id = "pasted_text" required></textarea>
+        <input class = "edit_submit" type = "submit" value = "Submit" style = "width: 120px;" >
+    </form>
+    <a href = "/newSearch" class = "cancel_sign">Cancel</a>
+    <!-- Library scripts -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+        });
+    </script>
+</body>
+</html>

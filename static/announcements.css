@@ -1,0 +1,161 @@
+@viewport{
+    zoom: 1.0;
+    width: extend-to-zoom;
+}
+@-ms-viewport{
+    width: extend-to-zoom;
+    zoom:1.0;
+}
+body{
+    margin:0;
+    padding:0;
+    font-family: "Montserrate", sans-serif;
+    overflow: hidden;
+}
+section{
+    width: 100%;
+    height: 100vh;
+    background: url("Assets/announcements_bg.jpg");
+    background-size: cover;
+}
+section .box-L{
+    width:50%;
+    height:100%;
+    float:left;
+    padding:50px;
+    text-align: center;
+    box-sizing: border-box;
+
+}
+section .box-L .box-content{
+    color: #fff;
+    background: rgba(0,0,0,0.6);
+    padding: 40px;
+    transition: 0.5s;
+}
+section .box-L .box-content:hover{
+    background: #47B5FF;
+}
+section .box-L .box-content h1{
+    margin:0;
+    padding:0;
+    font-size: 50px;
+    text-transform: uppercase;
+}
+section .box-L .box-content p{
+    margin: 10px 0 0;
+    padding: 0;
+}
+section .announcements-list{
+    position: relative;
+    width: 50%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    float: right;
+    box-sizing: border-box;
+    
+}
+section .announcements-list ul{
+    position: absolute;
+    top:50%;
+    transform: translateY(-50%);
+    margin: 0;
+    padding: 40px;
+    box-sizing: border-box;
+}
+section .announcements-list ul li{
+    list-style: none;
+    background: #fff;
+    box-sizing: border-box;
+    height: 200px;
+    margin: 15px 0;
+}
+section .announcements-list ul li .announcement-date{
+    position: relative;
+    padding: 20px;
+    background: rgba(0,0,0,0.6);
+    box-sizing: border-box;
+    width: 30%;
+    height: 100%;
+    float: left;
+    text-align: center;
+    transition: 0.5s;
+    font-size: 30px;    
+
+}
+section .announcements-list ul li:hover .announcement-date{
+    background: #47B5FF;
+}
+section .announcements-list ul li .announcement-date h2{
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    font-size: 60px;
+    line-height: 30px;
+
+}
+section .announcements-list ul li .announcement-date h2 span{
+    font-size:30px;
+}
+section .announcements-list ul li .announcement-details{
+    padding: 20px;
+    background: #fff;
+    box-sizing: border-box;
+    width: 70%;
+    height: 30%;
+    float: left;
+}
+section .announcements-list ul li .announcement-details h3{
+    position: relative;
+    margin: 10px 0 0;
+    padding: 0;
+    font-size: 16px;
+    text-transform: uppercase;
+}
+
+.fancyButton{
+    display: inline-block;
+    padding: 15px 25px;
+    font-size: 20px;
+    text-transform: uppercase;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: #fff;
+    background-color: #31a9fa;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 9px #0c7cc7;
+    -webkit-transform: translate(-50%, -100%);
+    transform: translate(-50%, -100%);   
+}
+
+.fancyButton span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+}
+
+.fancyButton span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -30px;
+    transition: 0.5s;
+}  
+
+.fancyButton:hover span {
+    padding-right: 15px;
+}
+
+.fancyButton:hover span:after {
+    opacity: 1;
+    right: 0;
+}

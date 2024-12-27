@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="shortcut icon" type="image/png" href="static/Assets/favicon-32x32.png">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> Readable </title>
+    <link rel="stylesheet" href="static/history.css">
+    <!-- Animation library --> 
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    
+
+</head>
+<body>
+    <header>
+        <hr>
+        <ul class="NavigationBar">
+            <li><a href="/">Home</a></li>
+            <li><a href="newSearch">New Search</a></li>
+            <li><a href="findText">Find Text</a></li>
+            <li><a href="history">History</a></li>
+            <li><a href="account">Account</a></li>
+            <li><a href="logout">Logout</a></li>
+        </ul>
+    </header>
+    <section data-aos = "slide-up">
+        <div class = "container">
+            <table>
+                <tr>
+                <th colspan="5" style = "font-size: 50px;">Find Text</th>
+                </tr>
+                <tr>
+                        <td><input type = "image" src="static/find_text_imgs/Animal Farm.png" id = "1" name = "history_button" alt="" border="3" height="300" width="300" onclick="get_button_id(this.id)"></td>                                        
+                        <td><input type = "image" src="static/find_text_imgs/Of Mice and Men.png" id = "2" name = "history_button" alt="" border="3" height="300" width="300" onclick="get_button_id(this.id)"></td>                                        
+                        <td><input type = "image" src="static/find_text_imgs/A Doll's House.png" id = "3" name = "history_button" alt="" border="3" height="300" width="300" onclick="get_button_id(this.id)"></td>                                        
+                        <td><input type = "image" src="static/find_text_imgs/The Great Gatsby.png" id = "4" name = "history_button" alt="" border="3" height="300" width="300" onclick="get_button_id(this.id)"></td>                                        
+                        <td><input type = "image" src="static/find_text_imgs/Things Fall Apart.png" id = "5" name = "history_button" alt="" border="3" height="300" width="300" onclick="get_button_id(this.id)"></td>                                        
+                        <td><input type = "image" src="static/find_text_imgs/Harry Potter and the Order of the Phoenix.png" id = "6" name = "history_button" alt="" border="3" height="300" width="300" onclick="get_button_id(this.id)"></td>                                        
+                        <td><input type = "image" src="static/find_text_imgs/Lord of the Flies.png" name = "history_button" id = "7" alt="" border="3" height="300" width="300" onclick="get_button_id(this.id)"></td>                                        
+                        
+                </tr>
+            </table>
+        </div>
+    </section>
+    <!-- Libraries -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 900,
+        });
+    </script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+
+    <script type="text/javascript">
+        function get_button_id(clicked_id)
+        {
+            // Called when a image "button" is clicked (uses ajac)
+            $.ajax({
+                // Sends to flask file a POST request to the function "/findTextImage" with the data of the id of the button.
+                type: "POST",
+                url: "/findTextImage",
+                data: JSON.stringify(clicked_id),
+                contentType: "application/json",
+                dataType: "json",
+                success:function(response){ document.write(response); }       
+            })
+        }
+    </script>
+</body>
+</html>

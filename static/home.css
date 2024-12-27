@@ -1,0 +1,332 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+@viewport{
+    zoom: 1.0;
+    width: extend-to-zoom;
+}
+@-ms-viewport{
+    width: extend-to-zoom;
+    zoom:1.0;
+}
+
+body{
+    margin:0;
+}
+
+header{
+    height: 100vh;
+    -webkit-background-size:cover;
+    background-size: cover;
+    background-position: center center;
+    position: relative;
+}
+
+section {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 700px;
+    padding: 100px 20vw;
+    background-position: center center;
+    -webkit-background-size:cover;
+    background-size: cover;
+}
+
+.NavigationBar{
+    float: right;
+    list-style: none;
+    margin-top: 30px;
+}
+
+.NavigationBar li{
+    display: inline-block;
+}
+
+.NavigationBar li a{
+    color: #000;
+    text-decoration: none;
+    padding: 5px 20px;
+    font-family: "Montserrate", sans-serif;
+    font-size: 16px;
+}
+    
+.NavigationBar li a:hover{
+    background: #000;
+    color: #fff;
+}
+
+.MainText {
+    position: absolute;
+    text-align: center;
+    left: 50%;
+    top: 37%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);    
+}
+
+.MainText h1{
+    text-align: center;
+    font-size: 90px;
+    font-family: "Brush Script MT";
+    color: #000;
+    text-transform: uppercase;
+    
+}
+
+.MainText a{
+    padding: 10px 25px;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 20px;
+    margin-top: 20px;
+    display: inline-block;
+    color: #000;
+    text-align: center;
+    font-family: "Montserrate", sans-serif;
+}
+
+.signing_buttons:hover{
+    background: #000;
+    color: #fff;
+}
+
+.Header{
+    font-size: 35px;
+    font-family: "Montserrate", sans-serif;
+    color: #000;
+    top: 6%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+
+.fancyButton{
+    display: inline-block;
+    padding: 15px 25px;
+    font-size: 20px;
+    text-transform: uppercase;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: #fff;
+    background-color: #31a9fa;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 9px #0c7cc7;
+    -webkit-transform: translate(-50%, -100%);
+    transform: translate(-50%, -100%);   
+}
+
+.fancyButton span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+}
+
+.fancyButton span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -30px;
+    transition: 0.5s;
+}  
+
+.fancyButton:hover span {
+    padding-right: 15px;
+}
+
+.fancyButton:hover span:after {
+    opacity: 1;
+    right: 0;
+}
+
+/* Waves */
+
+.wave1 {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+}
+
+.wave1 svg {
+    position: relative;
+    display: block;
+    width: calc(214% + 1.3px);
+    height: 426px;
+}
+
+.wave1 .shape-fill {
+    fill: #47B5FF;
+}
+
+.wave2 {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    transform: rotate(180deg);
+}
+
+.wave2 svg {
+    position: relative;
+    display: block;
+    width: calc(300% + 1.3px);
+    height: 330px;
+    transform: rotateY(180deg);
+}
+
+.wave2 .shape-fill {
+    fill: #06283D;
+}
+
+.blob{
+    width: 576px;
+    height: 536px;
+    margin: auto;
+    position: relative;
+    background-image: linear-gradient(to bottom right, rgb(0, 0, 0), rgb(138, 138, 138));
+    opacity: 0.1;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+}  
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+}   
+
+::-webkit-scrollbar-thumb {
+    background: #888; 
+}  
+::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+}
+
+/* Slider */
+
+.frame{
+    overflow: hidden;
+    height: 783px;
+    width: 506px;
+    margin-top: 20px;
+    margin-left: 50px;
+    margin-right: 50px;
+    border: 8px inset rgba(255, 215, 0, 1);
+    box-shadow: 1px 6px 40px 11px #FFD700;
+}
+
+@-webkit-keyframes sliding_animation{
+    0% {left:0px;}
+    10% {left:0px;}
+    20% {left:506px;}
+    30% {left:506px;}
+    40% {left:1012px;}
+    50% {left:1012px;}
+    60% {left:506px;}
+    70% {left:506px;}
+    80% {left:0px;}
+    90% {left:0px;}
+    100% {left:0px;}
+}
+
+.frame-images{
+    height: 783px;
+    width: 1518px;
+    margin: 0 0 0 -1012px;
+    position: relative;
+    -webkit-animation-name: sliding_animation;
+    -webkit-animation-duration: 33s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-direction: alternate;
+    -webkit-animation-play-state: running;
+}
+
+.container-images{
+    height: 783px;
+    width: 506px;
+    position: relative;
+    float: left;
+}
+
+
+
+.booksHeader{
+    text-align: center;
+    bottom: 100px;
+    font-size: 50px;
+    position: relative;
+    font-family: "Brush Script MT";
+    color: white;
+    text-transform: uppercase;
+}
+
+.animated-wrapper{
+    margin-left: 70%;
+
+}
+
+.animated-wrapper .stable-text{
+    color: #fff;
+    font-size: 100px;
+    font-family: "Montserrate", sans-serif;
+    font-weight: 400;
+}
+
+.animated-wrapper .changing-text{
+    margin-left: 15px;
+    height: 90px;
+    line-height: 90px;
+    overflow: hidden;
+}
+
+.changing-text li{
+    font-family: "Montserrate", sans-serif;
+    color: #000000;
+    list-style: none;
+    font-size: 64px;
+    font-weight: 500;
+    position: relative;
+    top: 0;
+    animation: slide 6s steps(4) infinite;
+}
+
+@keyframes slide {
+    100%{
+        top: -360px;
+    }    
+}
+
+.changing-text li span{
+    position:relative;
+}
+
+.changing-text li span::after{
+    content: "";
+    position: absolute;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: #47B5FF;
+    border-left: 2px solid #000000;
+    animation: typing 1.5s steps(10) infinite;
+}
+
+@keyframes typing{
+    100%{
+        left: 100%;
+        margin: 0 -35px 0 35px;
+    }
+}

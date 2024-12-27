@@ -1,0 +1,265 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+@viewport{
+    zoom: 1.0;
+    width: extend-to-zoom;
+}
+@-ms-viewport{
+    width: extend-to-zoom;
+    zoom:1.0;
+}
+body{
+    background-color: #EEEEEE;
+    margin:0;
+    overflow: hidden;
+
+}
+
+header{
+    height: 10vh;
+    -webkit-background-size:cover;
+    background-size: cover;
+    background-position: center center;
+    position: relative;
+}
+
+.NavigationBar{
+    float: right;
+    list-style: none;
+    margin-top: 30px;
+}
+
+.NavigationBar li{
+    display: inline-block;
+}
+
+.NavigationBar li a{
+    color: #000;
+    text-decoration: none;
+    padding: 5px 20px;
+    font-family: "Montserrate", sans-serif;
+    font-size: 16px;
+}
+    
+.NavigationBar li a:hover{
+    background: #000;
+    color: #fff;
+}
+
+.Header{
+    font-size: 35px;
+    font-family: "Montserrate", sans-serif;
+    color: #000;
+}
+
+.curve {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    transform: rotate(180deg);
+}
+
+.curve svg {
+    position: relative;
+    display: block;
+    width: calc(100% + 1.3px);
+    height: 167px;
+}
+
+.curve .shape-fill {
+    fill: #787A91;
+}
+
+.container{
+    margin-top: -50px;
+    width: 1000px;
+    height: 650px;
+    background-color: #141E61;
+    border-radius: 90px;
+}
+section {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 700px;
+    padding: 100px 20vw;
+    background-position: center center;
+    -webkit-background-size:cover;
+    background-size: cover;
+}
+
+img {
+    border-radius: 50%;
+}  
+
+.tilt {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+}
+
+.tilt svg {
+    position: relative;
+    display: block;
+    width: calc(100% + 1.3px);
+    height: 278px;
+    transform: rotateY(180deg);
+}
+
+.tilt .shape-fill {
+    fill: #0F044C;
+}
+
+.vertical_bar {
+    border-left: 80px solid #142594;
+    height: 650px;
+    position: sticky;
+    bottom: 90%;
+}
+
+.button{
+    display: block;
+    margin-top:50px;
+    height: 120px;
+    border:none;
+    outline: none;
+    border-radius: 5px;
+    overflow: hidden;
+    position: relative;
+    background:transparent;
+    -ms-transform: translateX(-100%);
+    transform: translateX(-100%);
+    top: 40%;
+    cursor: pointer;
+}
+
+.button_icon{
+    display: inline-flex;
+    align-items: center;
+    padding: 0 24px;
+    color: rgb(255, 255, 255);
+    height: 100%;
+    font-size: 1.5em;
+}
+
+.button_icon:hover{
+    color: rgb(0, 0, 0)
+}
+
+
+.info_form {  
+    z-index: 10;
+    display: inline-block;
+    flex-flow: row wrap;
+    align-items: center;
+    color: rgb(177, 177, 177);
+    font-size: 24px;
+    position: absolute;
+    line-height: 1.5;
+    left: 20%;
+    bottom: 33%;    
+}  
+.info_form label {
+    margin: 90px 70px 5px 0;
+}  
+
+@media (max-width: 800px) {
+    .info_form {
+    flex-direction: column;
+    align-items: stretch;
+    }
+}
+
+.settings_switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}  
+.settings_switch input { 
+    opacity: 0;
+    width: 0;
+    height: 0;
+}  
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}  
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}  
+input:checked + .slider {
+    background-color: #21f33d;
+}  
+input:focus + .slider {
+    box-shadow: 0 0 1px #21f33d;
+} 
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}  
+
+.slider.round {
+    border-radius: 34px;
+}  
+.slider.round:before {
+    border-radius: 50%;
+}
+
+.settings_button{
+    color: white;
+    font-size:24px;
+    margin-left: 200px;
+    display: inline-block;
+    font-family: helvetica;
+    position: absolute;
+    bottom: 60%;
+    width: 50px;
+    line-height: 6;
+    top: 25%;
+}
+
+.edit_button{
+    color: rgb(255, 255, 255);
+    position: relative;
+    display: block;
+    height: 40px;
+    width: 40px;
+    background: transparent;
+    z-index: 10;
+    border:none;
+    outline: none;
+    border-radius: 5px;
+    overflow: hidden;   
+    cursor: pointer;
+    margin-top: 3%;
+}
+
+.edit_button:hover{
+    color: rgb(0, 0, 0)
+}

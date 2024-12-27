@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="shortcut icon" type="image/png" href="static/Assets/favicon-32x32.png">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> Readable </title>
+    <link rel="stylesheet" href="static\announcements.css">
+    <!-- Animation library --> 
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+</head>
+<body>
+    <section style="z-index:999;">
+        <div class = "box-L">
+            <div class = "box-content" data-aos="zoom">
+                <h1>Readable Announcements</h1>
+                <p>On the right are the latest announcements for Readable including new features, changes and many more!</p>
+            </div>
+        </div>
+        <div class = "announcements-list">
+            <ul>
+                <li data-aos = "zoom">
+                    <div class = "announcement-date">
+                        <h2>12<br><span>July</span></h2>
+                    </div>
+                    <div class = "announcement-details">
+                        <h3>The Birth of Readable</h3>
+                        <p>On this day Readable was born. On this day the Journey Begun.</p>
+                    </div>
+                    <div style = "clear: both;"></div>
+                </li>
+            </ul>
+            <a href="/" class="fancyButton"
+                    style="z-index: 10;position: relative; vertical-align:center; margin-top: 97%; margin-left: 50%;"><span>Back
+            </span></a>
+        </div>
+    </section>
+    <!-- Library scripts -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1800,
+        });
+    </script>
+</body>
+</html>

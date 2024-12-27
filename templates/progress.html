@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="shortcut icon" type="image/png" href="static/Assets/favicon-32x32.png">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> Readable </title>
+    <link rel="stylesheet" href="static\progress.css">
+    <!-- Animation library --> 
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <!-- Getting jquery-->
+</head>
+
+<body onload = "progress_bar_updater(progress_bar, '{{ value }}' )">
+    <div class = "header_text">Loading...</div>
+    <div class = "progress_load">
+        <div class = "progress_filler">
+            <span class = "progress_text">0%</span>
+        </div>
+    </div>
+    <div class = "header_text" style = "text-transform: uppercase; font-size:14px; top: 57%;">Note: The more the text or The larger the file size the longer the process will take. So Please wait</div>
+
+    
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+        });
+    </script>
+    <!-- Getting file name -->
+    <script>
+        // define progress_bar variable
+        const progress_bar = document.querySelector(".progress_load");
+        // define the header text that will change as progress bar percentage changes
+        const header_text = document.querySelector(".header_text");
+        let counter = 0;
+        // main function
+        function progress_bar_updater(progress_bar, value){
+            var the_interval = setInterval(() => { // Sets an interval (loop with delay) to continuously update progress bar 
+                if (value == 100){ // check if progress bar is finished
+                    header_text.innerHTML = "Loading Results..."; // Update the header text
+                    clearInterval(the_interval); // end interval 
+                    window.location.replace("/readability"); // Switch to window of readability 
+                }else if(value == 25){ // If value reaches 25
+                    header_text.innerHTML = "Gathering Data..."; // Update header text
+                    counter += 0.05; // increase counter
+                    value = counter // update the value
+                    value = Math.round(value); // round the value to display whole numbers for the progress bar
+                    progress_bar.querySelector(".progress_text").textContent = `${value}%`; // change the text number
+                    progress_bar.querySelector(".progress_filler").style.width = `${value}%`; // change the amount of color the progress bar is filled
+                }else if(value == 50){ // everything below is a copy of the functions above 
+                    header_text.innerHTML = "Calculating Grade Level...";
+                    counter += 0.05;
+                    value = counter
+                    value = Math.round(value);
+                    progress_bar.querySelector(".progress_text").textContent = `${value}%`;
+                    progress_bar.querySelector(".progress_filler").style.width = `${value}%`;
+                }else if(value == 75){
+                    header_text.innerHTML = "Packaging...";
+                    counter += 0.05;
+                    value = counter
+                    value = Math.round(value);
+                    progress_bar.querySelector(".progress_text").textContent = `${value}%`;
+                    progress_bar.querySelector(".progress_filler").style.width = `${value}%`;
+                }else{
+                    counter += 0.05;
+                    value = counter
+                    value = Math.round(value);
+                    progress_bar.querySelector(".progress_text").textContent = `${value}%`;
+                    progress_bar.querySelector(".progress_filler").style.width = `${value}%`;
+                }
+                
+                
+            }, 5);
+        
+    }
+    </script>
+</body>
+</html>

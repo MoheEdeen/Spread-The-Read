@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="shortcut icon" type="image/png" href="static/Assets/favicon-32x32.png">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> Readable </title>
+    <link rel="stylesheet" href="static\account.css">
+    <!-- Animation library --> 
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+</head>
+<body>
+    <header>
+        <hr>
+        <ul class="NavigationBar">
+            <li><a href="/">Home</a></li>
+            <li><a href="newSearch">New Search</a></li>
+            <li><a href="findText">Find Text</a></li>
+            <li><a href="history">History</a></li>
+            <li><a href="account">Account</a></li>
+            <li><a href="logout">Logout</a></li>
+        </ul>
+        
+    </header>
+    <section>
+    <div class = "container" data-aos = "slide-up" easing = "ease-in-out-cubic" style = "z-index: 1;">
+        <img src = "static/Assets/pfp image.jpg" alt = "User pfp" style = "width: 125px; display: block; margin-left: auto; margin-right: auto; top: 20px; position: relative">
+        <div class="tilt">
+            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M741,116.23C291,117.43,0,27.57,0,6V120H1200V6C1200,27.93,1186.4,119.83,741,116.23Z" class="shape-fill"></path>
+            </svg>
+        </div>
+        <div class = "account_overview " style = "margin-top: 100px;">
+            <button type = "button" class = "edit_button" style = "margin-left: 75%; top: 100%;" >
+                
+            </button>
+            <button type = "button" class = "edit_button" style = "margin-left: 75%; top: 100%;" >
+                
+            </button>
+            <button type = "button" class = "edit_button" style = "margin-left: 75%; top: 100%; " >
+                
+            </button>
+            <button type = "button" class = "edit_button" style = "margin-left: 75%; top: 100%; " >
+                
+            </button>
+            <form class = "info_form" style = "font-family: helvetica;">
+                <label for="lname">Username:</label><br>
+                <label for="fname" style = "color: white">{{ username }}</label><br>
+                <label for="fname">Password:</label><br>
+                <label for="fname" style = "color: white">{{ password }}</label><br>
+                <label for="lname">Email:</label><br>
+                <label for="fname" style = "color: white">{{ email }}</label><br>
+            </form>
+        </div>
+    </div>
+    </section>
+    <div class="curve">
+        <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <path d="M0,0V7.23C0,65.52,268.63,112.77,600,112.77S1200,65.52,1200,7.23V0Z" class="shape-fill"></path>
+        </svg>
+    </div>  
+    <!-- Libraries -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1250,
+        });
+    </script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+</html>

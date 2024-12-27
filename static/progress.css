@@ -1,0 +1,152 @@
+body{
+    background-color: #F9F5EB;
+    overflow: hidden; 
+}
+
+.progress_load{
+    position: relative;
+    width: 50%;
+    height: 8vh;
+    background: #829db4;
+    border-radius: 20px;
+    overflow: hidden;
+    left: 50%;
+    top: 44vh;
+    -webkit-transform: translate(-50%, 0%);
+    transform: translate(-50%, 0%);
+}
+
+.progress_filler{
+    width: 0%;
+    height: 100%;
+    background: #006b95;
+    transition: all 0.2s;
+
+}
+
+.progress_text{
+    position: absolute;
+    top: 50%;
+    font-size: 2.1em;
+    right: 60px;
+    transform: translateY(-50%);
+    color: #ffffff;
+    font-family: "Montserrate", sans-serif;
+}
+
+.header_text{
+    position: absolute;
+    font-size: 3.5em;
+    font-family: "Montserrate", sans-serif;
+    left: 50%;
+    top: 34vh;
+    -webkit-transform: translate(-50%, 0%);
+    transform: translate(-50%, 0%);
+    color: #0090c9;
+
+}
+
+h1{
+    position: absolute;
+    font-size: 3.5em;
+    font-family: "Montserrate", sans-serif;
+    left: 50%;
+    -webkit-transform: translate(-50%, 0%);
+    transform: translate(-50%, 0%);
+    color: #003e57;
+}
+
+h4{
+    position: absolute;
+    font-size: 1.7em;
+    font-family: "Montserrate", sans-serif;
+    left: 50%;
+    -webkit-transform: translate(-50%, 0%);
+    transform: translate(-50%, 0%);
+    color: #003e57;
+}
+
+h2{
+    position: absolute;
+    font-size: 2em;
+    font-family: "Montserrate", sans-serif;
+    left: 50%;
+    top: 10%;
+    -webkit-transform: translate(-50%, 0%);
+    transform: translate(-50%, 0%);
+    color: #ffffff;
+    text-align: center;
+}
+
+h3{
+    position: absolute;
+    font-size: 1.5em;
+    font-family: "Montserrate", sans-serif;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, 0%);
+    transform: translate(-50%, 0%);
+    color: #ebebeb;
+    text-align: center;
+}
+
+.bookmark{
+    width: 100%;
+    height: 700px;
+    position: relative;
+    background-color: #27496D;
+    margin-bottom: 190px;
+    bottom: 20px;
+    
+}
+
+.bookmark:before, .bookmark:after{
+    width: 100%;
+    top: 100px;
+    left: 0;
+    background-color: #27496D;
+    height: 100%;
+    content: "";
+    position: absolute;
+    transform: skewY(20deg);
+    z-index: -1;
+}
+
+.bookmark:after{
+    transform: skewY(-20deg);
+
+}
+.vertical{
+    width: 300px;
+    margin: 20px auto;
+    
+}
+
+.fancyButton{
+    position: absolute;
+
+    font-family: "Montserrate", sans-serif;
+    padding: 15px 25px;
+    font-size: 1.2em;
+    text-transform: uppercase;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: #fff;
+    background-color: #004A7C;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 9px #0063a5;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -100%);
+    transform: translate(-50%, -100%);   
+    z-index: 999;
+    
+}
+
+.fancyButton:hover{
+    background-color: #0070bb;
+    box-shadow: 0 9px rgb(0, 127, 211);
+}

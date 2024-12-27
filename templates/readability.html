@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="shortcut icon" type="image/png" href="static/Assets/favicon-32x32.png">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> Readable </title>
+    <link rel="stylesheet" href="static\progress.css">
+    <!-- Animation library --> 
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <!-- Getting jquery-->
+</head>
+
+<body >
+    <h1>Grade</h1>
+    <h4 style = "top: 12%">Words: {{ words }}</h4>
+    <h4 style = "top: 17%">Sentences: {{ sentences }}</h4>
+    <h4 style = "top: 22%">Letters: {{ letters }}</h4>
+    <h4 style = "top: 27%">Syllables: {{ syllables }}</h4>
+    <h4 style = "top: 32%">Complex Words: {{ complex_words }}</h4>
+    <h4 style = "top: 90%; color: #47B5FF;">Recommended Level: {{ recommended_level }}</h4>
+    <a href="/" class="fancyButton"><span>Back
+    </span></a>
+    <div class = "vertical" data-aos = "slide-down">
+        <div class = "bookmark" style = "left: 250%;">
+            <h2>Automated Readability Index</h2>
+            <em><h4 style = "top: 30%; color: white; font-size: 10px; text-align: center;">Understandability of a test, derived from ratios representing word difficulty (number of letters per word) and sentence difficulty (number of words per sentence).</h4></em>
+            <h3>Score: {{ score4 }}</h3>
+            <h3 style = "top: 60%;">Grade: {{ grade4 }}</h3>
+        </div>
+        <div class = "bookmark" style = "left: 120%; bottom: 910px;">
+            <h2>Gunning Fog Index</h2>
+            <em><h4 style = "top: 30%; color: white; font-size: 10px; text-align: center;">Estimates the years of formal education a person needs to understand the text on the first reading.</h4></em>
+            <h3>Score: {{ score3 }}</h3>
+            <h3 style = "top: 60%;">Grade: {{ grade3 }}</h3>
+        </div>            
+        <div class = "bookmark" style = "right: 120%; bottom: 1800px;">
+            <h2>Flesch Kincaid Reading Ease</h2>
+            <em><h4 style = "top: 35%; color: white; font-size: 10px; text-align: center;">Well-established in use cases ranging from marketing to government.</h4></em>
+            <h3>Score: {{ score2 }}</h3>
+            <h3 style = "top: 60%;">Grade: {{ grade2 }} </h3>
+        </div>
+        <div class = "bookmark" style = "right: 250%; bottom: 2690px;">
+            <h2>Coleman Liau Index</h2>
+            <em><h4 style = "top: 30%; color: white; font-size: 10px; text-align: center;">Understandability of a test, relies on characters per word for mechanically from samples of hard-copy text.</h4></em>
+            <h3>Score: {{ score1 }}</h3>
+            <h3 style = "top: 60%;">Grade: {{ grade1 }}</h3>
+            <h3 style = "top: 70%;">Age: {{ age1 }}</h3>
+        </div>
+    </div>
+    
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1500,
+        });
+    </script>
+</body>
+</html>
+
+<!--
+    Automated Readability test:
+    Understandability of a test, derived from ratios representing word difficulty (number of letters per word) and sentence difficulty (number of words per sentence)
+
+    Coleman Liau Index:
+    Understandability of a test, relies on characters per word for mechanically from samples of hard-copy text
+
+    Gunning Fog Index:
+    estimates the years of formal education a person needs to understand the text on the first reading
+
+    Flesch kincaid reading ease:
+    well-established in use cases ranging from marketing to government. 
+
+-->

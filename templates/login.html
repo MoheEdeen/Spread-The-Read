@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="shortcut icon" type="image/png" href="static/Assets/favicon-32x32.png">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> Readable </title>
+    <link rel="stylesheet" href="static\sign.css">
+    <!-- Animation library --> 
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+</head>
+<body>
+    <div class = "login_sheet" data-aos="zoom-out">
+        <h1> Login </h1>
+        <form method = "POST" action = "/login">
+            <label>Username</label>
+            <input type = "text" placeholder="Username" name = "username" id = "username" required>
+            <label>Password</label>
+            <input type = "password" placeholder="Password" name = "password" id = "password" required>
+            <input type = "submit" value = "Login ">
+        </form>
+        <a href = "/" class = "cancel_sign">Cancel</a>
+    </div>
+    <p class = "error" data-aos = "zoom-out-up"><b>{{ message }}</b></p>
+    <p class = "no_account" data-aos="zoom-out-up">Don't have an account? <a href = "sign_up">Sign Up here</a></p>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 750,
+        });
+    </script>
+</body>
+</html>

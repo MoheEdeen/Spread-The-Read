@@ -5,7 +5,7 @@
     <link rel="shortcut icon" type="image/png" href="static\Assets\favicon-32x32.png">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title> Readable </title>
+    <title> Spread the Read </title>
     <link rel="stylesheet" href="static\home.css">
     <!-- Animation library --> 
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
@@ -25,12 +25,12 @@
             </ul>
         {% endif %}
         <div class="MainText" >
-            <h1>Readable</h1>
+            <h1>Spread the Read</h1>
             {% if session["user_id"] %}
             <h1 style = "font-size: 36px; font-family: Montserrate, sans-serif;"> Welcome {{ username }}</h1>
-                <a class = "signing_buttons" href="logout">Logout</a>
+                <a class = "signing_buttons" style = "left:5vw; position:relative;" href="logout">Logout</a>
                 <a href="announcements" class="fancyButton"
-                    style="z-index: 10;position: relative; vertical-align:center; margin-top: 27%; margin-left: 50%;"><span>Announcements!
+                    style="z-index: 10;position: relative; top: 10vh; left: 2vw;"><span>Announcements!
                 </span></a>
             {% else %}
                 <a class = "signing_buttons" href="sign_up">Sign Up</a>
@@ -45,6 +45,7 @@
         </div>
     </header>
     <section style="color:#fff;background:#47B5FF">
+        <!-- Helped from https://youtu.be/m0o0QNpY9-0 -->
         <div class = "animated-wrapper" data-aos="fade-up">
             <div class = "stable-text">Search</div>
             <ul class = "changing-text">
@@ -54,14 +55,13 @@
                 <li><span>Text</span></li>
             </ul>
         </div>
-        <div class="Header" data-aos="fade-up" style="position: absolute; text-align: left; right: 60%; bottom: 87%;">
-            <h1 style="text-transform: uppercase;">What is Readable?</h1>
+        <div class="Header" data-aos="fade-up" style="position: absolute; text-align: left; right: 50%; bottom: 87%;">
+            <h1 style="text-transform: uppercase;">What is Spread the Read?</h1>
             <br>
             <div class="Body" style="position: absolute;">
-                <p>Readable is an interactive software that is able to aid
+                <p>Spread the Read is an interactive software that is able to aid
                     the user into finding out the suitable grade level for a piece of text,
-                    that can be inserted by the user. You can also check pervious searches
-                    on Readable and edit them!
+                    that can be inserted by the user. 
                 </p>
             </div>
         </div>

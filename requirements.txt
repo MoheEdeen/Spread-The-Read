@@ -1,21 +1,10 @@
-## FOR PYTHON FILES ##
-
-distutils.command.upload
-flask
-flask_session
-werkzeug.security
-werkzeug.utils
-os
-cs50
+numpy
+password-strength
+Pillow
 syllables
-PIL
-io
-json
-pyodbc
-flask_wtf
 wtforms
-numpi
-
-## FOR OTHER FILES ## 
-
-jquery
+flask-wtf
+cs50
+werkzeug
+Flask
+flask-session

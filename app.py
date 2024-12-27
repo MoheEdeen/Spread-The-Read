@@ -1,29 +1,27 @@
-# Importing all libraries
-from distutils.command.upload import upload
-from flask import Flask, render_template, request, redirect, session, jsonify  # Flask
-from flask_session import Session  # Sessions instead of web cookies
-# hashing passwords for protection
-from werkzeug.security import check_password_hash, generate_password_hash
-from werkzeug.utils import secure_filename
-import os  # used for  operating system functions
-from cs50 import SQL  # Harvard library SQL
-from require import login_required  # My own file in different location
-from flask_wtf import FlaskForm  # Connect forms between html and flask
-# Connect forms between html and flask
-from wtforms import FileField, SubmitField
-import syllables  # syllable estimator
-from PIL import Image, ImageDraw, ImageFont  # To create thumbnails
-import io  # provides access to files and directories
-import json  # To receive values from javascript
-from password_strength import PasswordPolicy  # To check password strength
 import numpy as np
+from password_strength import PasswordPolicy  # To check password strength
+import json  # To receive values from javascript
+import io  # provides access to files and directories
+from PIL import Image, ImageDraw, ImageFont  # To create thumbnails
+import syllables  # syllable estimator
+from wtforms import FileField, SubmitField
+from flask_wtf import FlaskForm  # Connect forms between html and flask
+from require import login_required  # My own file in different location
+from cs50 import SQL  # Harvard library SQL
+import os  # used for  operating system functions
+from werkzeug.utils import secure_filename
+from werkzeug.security import check_password_hash, generate_password_hash
+from flask_session import Session  # Sessions instead of web cookies
+from flask import Flask, render_template, request, redirect, session, jsonify  # Flask
+# Importing all libraries
+# hashing passwords for protection
+# Connect forms between html and flask
 
 app = Flask(__name__)
 # Security key for the application
 app.config["SECRET_KEY"] = "read@blesecuritykey"
 # For uploading folders in application location
 app.config["UPLOAD_FOLDER"] = "static/files"
-
 # Creating the flask form
 
 
@@ -199,9 +197,18 @@ def paste_text():
         blob_pasted_text = pasted_file.read()  # get text in blob format (bytes)
         pasted_file.close()  # Close file
         os.remove(pasted_file_name)  # remove the temp file created
-        db.execute("INSERT INTO files (file_name,file_data,title,user_id) VALUES (?, ?, ?, ?)",
-                   pasted_file_name, blob_pasted_text, name, user_id)  # paste everything into a database
+
+        db.execute("INSERT INTO files (file_name,file_data,title,num,user_id) VALUES (?, ?, ?, ?, ?)",
+                   pasted_file_name, blob_pasted_text, name, 0, user_id)  # paste everything into a database
+        current_file_id = db.execute(
+            "SELECT seq FROM sqlite_sequence WHERE name = ?", "files")
+        current_file_id = current_file_id[0]
+        current_file_id = current_file_id["seq"]
+        number = current_file_id
+        db.execute("UPDATE files SET num = ? WHERE id = ?", number, number)
         return redirect("/progressBar")  # go to progress bar page
+
+# Upload File Function
 
 
 @ app.route("/newSearch", methods=["GET", "POST"])
@@ -222,9 +229,16 @@ def new_search():
                 # get file name without the ".txt"
                 name = uploaded_file.filename.split(".")
                 name = name[0].title()  # make the file name in title format
-                db.execute("INSERT INTO files (file_name,file_data,title,user_id) VALUES (?, ?, ?, ?)",
-                           uploaded_file.filename, uploaded_file.stream.read(), name, user_id)  # paste into database
 
+                db.execute("INSERT INTO files (file_name,file_data,title,num,user_id) VALUES (?, ?, ?, ?, ?)",
+                           uploaded_file.filename, uploaded_file.stream.read(), name, 0, user_id)  # paste into database
+                current_file_id = db.execute(
+                    "SELECT seq FROM sqlite_sequence WHERE name = ?", "files")
+                current_file_id = current_file_id[0]
+                current_file_id = current_file_id["seq"]
+                number = current_file_id
+                db.execute(
+                    "UPDATE files SET num = ? WHERE id = ?", number, number)
                 return redirect("/progressBar")  # go to progress bar page
             else:
                 # if file is not .txt
@@ -322,43 +336,43 @@ def gunning_fog_index(content):
         index = round(0.4 * ((words/sentences) + 100 * (complex_words/words)))
         if (index > 20):  # Check index range and compare it to key
             grade = fog_key["20+"]
-        elif (17 <= index < 21):
+        elif(17 <= index < 21):
             grade = fog_key["17"]
-        elif (index == 17):
+        elif(index == 17):
             grade = fog_key["17"]
-        elif (index == 16):
+        elif(index == 16):
             grade = fog_key["16"]
-        elif (index == 15):
+        elif(index == 15):
             grade = fog_key["15"]
-        elif (index == 14):
+        elif(index == 14):
             grade = fog_key["14"]
-        elif (index == 13):
+        elif(index == 13):
             grade = fog_key["13"]
-        elif (index == 12):
+        elif(index == 12):
             grade = fog_key["12"]
-        elif (index == 11):
+        elif(index == 11):
             grade = fog_key["11"]
-        elif (index == 10):
+        elif(index == 10):
             grade = fog_key["10"]
-        elif (index == 9):
+        elif(index == 9):
             grade = fog_key["9"]
-        elif (index == 8):
+        elif(index == 8):
             grade = fog_key["8"]
-        elif (index == 7):
+        elif(index == 7):
             grade = fog_key["7"]
-        elif (index == 6):
+        elif(index == 6):
             grade = fog_key["6"]
-        elif (index == 5):
+        elif(index == 5):
             grade = fog_key["5"]
-        elif (index == 4):
+        elif(index == 4):
             grade = fog_key["4"]
-        elif (index == 3):
+        elif(index == 3):
             grade = fog_key["3"]
-        elif (index == 2):
+        elif(index == 2):
             grade = fog_key["2"]
-        elif (index == 1):
+        elif(index == 1):
             grade = fog_key["1"]
-        elif (index < 1):
+        elif(index < 1):
             grade = "Kindergarten"
     except:
         grade = "N/A"
@@ -386,19 +400,19 @@ def flesch_kincaid_reading_ease(content):
                       84.6 * (syllable/words))  # calculate index
         if (90 <= index <= 100):  # check index with key
             grade = flesch_key["100"]
-        elif (80 <= index < 90):
+        elif(80 <= index < 90):
             grade = flesch_key["89"]
-        elif (70 <= index < 80):
+        elif(70 <= index < 80):
             grade = flesch_key["79"]
-        elif (60 <= index < 70):
+        elif(60 <= index < 70):
             grade = flesch_key["69"]
-        elif (50 <= index < 60):
+        elif(50 <= index < 60):
             grade = flesch_key["59"]
-        elif (30 <= index < 50):
+        elif(30 <= index < 50):
             grade = flesch_key["49"]
-        elif (10 <= index < 30):
+        elif(10 <= index < 30):
             grade = flesch_key["29"]
-        elif (0 <= index < 10):
+        elif(0 <= index < 10):
             grade = flesch_key["9"]
         elif (index < 0):
             grade = "Professional"
@@ -407,6 +421,8 @@ def flesch_kincaid_reading_ease(content):
     except:
         grade = "N/A"
     return str(index), grade
+
+# Coleman Liau Index
 
 
 def liau_index(content):
@@ -547,7 +563,8 @@ def readability_grades():
     history_thumbnail = Image.open("static/history book bg.png")
     drawer = ImageDraw.Draw(history_thumbnail)  # draw image
     # draw title at the center of the image
-    w, h = drawer.textsize(file_title, font)
+    bbox = drawer.textbbox((0, 0), file_title, font=font)
+    w, h = bbox[2] - bbox[0], bbox[3] - bbox[1]
     drawer.text(((300-w)/2, (300-h)/2), file_title,
                 fill="black", font=font)  # draw
     history_thumbnail.save("waste.png")  # save image temporarily
@@ -607,8 +624,11 @@ def generate_level(index1, index2, index3, index4):
                 numbers.append(int(char))
     # find the mean of all the grades
     numbers_excluding_outliers = remove_outliers(numbers)
-    recommended_grade = round(
-        (sum(numbers_excluding_outliers))/len(numbers_excluding_outliers))
+    try:
+        recommended_grade = round(
+            (sum(numbers_excluding_outliers))/len(numbers_excluding_outliers))
+    except:
+        recommended_grade = 0
     # check if the recommended_grade is between 16 and 12
     if 12 < recommended_grade < 16:
         # loop through every key in the dictionary
@@ -641,7 +661,23 @@ def remove_outliers(numbers):
 @ app.route("/findText")
 @ login_required
 def find_text():
-    return render_template("findText.html")  # return page
+    file_id_total = db.execute(
+        "select seq from sqlite_sequence where name= ?", "samples")  # Select how many samples are present in database
+    file_id_total = file_id_total[0]
+    file_id_total = file_id_total["seq"]
+    counter = 1  # initialize counter variable
+    file_names = []  # initialize file-names list
+    ids = []  # initialize ids list
+    for i in range(file_id_total):  # loop through
+        current_file_name = db.execute(
+            "SELECT names FROM samples WHERE id = ?", i+1)  # select names of sample
+        current_file_name = current_file_name[0]
+        current_file_name = current_file_name["names"]
+        file_names.append(current_file_name)
+        ids.append(counter)
+        counter += 1
+    # return page
+    return render_template("findText.html", file_names=zip(file_names, ids))
 
 
 @ app.route("/findTextImage", methods=["GET", "POST"])
@@ -679,6 +715,218 @@ def find_text_image():
     complex_words = file_attributes["complex_words"]
     recommended_level = file_attributes["recommended_level"]
     return jsonify(render_template("textImage.html", recommended_level=recommended_level, file_name=file_name, flesch_kincaid_index=flesch_kincaid_index, flesch_kincaid_grade=flesch_kincaid_grade, liau_index=liau_index, liau_age=liau_age, liau_grade=liau_grade, gunning_fog_index=gunning_fog_index, gunning_fog_grade=gunning_fog_grade, automated_readability_index=automated_readability_index, automated_readability_grade=automated_readability_grade, words=words, letters=letters, sentences=sentences, syllables=syllables, complex_words=complex_words,))
+
+
+@ app.route("/sortImageAZ", methods=["POST"])
+@ login_required
+def sort_image():
+    file_id_total = db.execute(
+        "select seq from sqlite_sequence where name= ?", "samples")  # select how many samples are present
+    file_id_total = file_id_total[0]
+    file_id_total = file_id_total["seq"]
+    # Bubble Sort (Ascending)
+    # Gets all data from database
+    sort_image = db.execute("SELECT * FROM samples")
+    for i in range(file_id_total):  # bubble sort loop 1
+        for j in range(file_id_total-1):  # bubble sort loop 2
+            file_1 = sort_image[j]  # gets the first row from the database
+            file_2 = sort_image[j+1]  # gets second row from database
+            # compares the value of the key "names"
+            if (file_1['names'] > file_2['names']) == True:
+                temp = sort_image[j]  # puts first value in temp variable
+                sort_image[j] = sort_image[j+1]  # switches value
+                # puts temp in second value or first in second value
+                sort_image[j+1] = temp
+
+    for i in range(file_id_total):
+        file_attributes = sort_image[i]
+        # get all file attributes from current file
+        name = file_attributes["names"]
+        liau_index = file_attributes["liau_index"]
+        liau_age = file_attributes["liau_age"]
+        liau_grade = file_attributes["liau_grade"]
+        flesch_kincaid_index = file_attributes["flesch_kincaid_index"]
+        flesch_kincaid_grade = file_attributes["flesch_kincaid_grade"]
+        gunning_fog_index = file_attributes["gunning_fog_index"]
+        gunning_fog_grade = file_attributes["gunning_fog_grade"]
+        automated_readability_index = file_attributes["automated_readability_index"]
+        automated_readability_grade = file_attributes["automated_readability_grade"]
+        words = file_attributes["words"]
+        letters = file_attributes["letters"]
+        sentences = file_attributes["sentences"]
+        syllables = file_attributes["syllables"]
+        complex_words = file_attributes["complex_words"]
+        recommended_level = file_attributes["recommended_level"]
+        # update row in table
+        db.execute("UPDATE samples SET names = ?, words = ?, letters = ?, sentences = ?, syllables = ?, complex_words = ?, liau_index = ?, liau_age = ?, liau_grade = ?, flesch_kincaid_index = ?, flesch_kincaid_grade = ?, gunning_fog_index = ?, gunning_fog_grade = ?, automated_readability_index = ?, automated_readability_grade = ?, recommended_level = ? WHERE id = ?",
+                   name, words, letters, sentences, syllables, complex_words, liau_index, liau_age, liau_grade, flesch_kincaid_index, flesch_kincaid_grade, gunning_fog_index, gunning_fog_grade, automated_readability_index, automated_readability_grade, recommended_level, i+1)
+    return jsonify(render_template("findText.html"))
+
+
+@ app.route("/sortImageZA", methods=["POST"])
+@ login_required
+def sort_image_desc():
+    file_id_total = db.execute(
+        "select seq from sqlite_sequence where name= ?", "samples")  # select how many samples are present
+    file_id_total = file_id_total[0]
+    file_id_total = file_id_total["seq"]
+    # Bubble Sort (Descending)
+    # Gets all data from database
+    sort_image = db.execute("SELECT * FROM samples")
+    for i in range(file_id_total):  # bubble sort loop 1
+        for j in range(file_id_total-1):  # bubble sort loop 2
+            file_1 = sort_image[j]  # gets the first row from the database
+            file_2 = sort_image[j+1]  # gets second row from database
+            # compares the value of the key "names"
+            if (file_1['names'] > file_2['names']) == False:
+                temp = sort_image[j]  # puts first value in temp variable
+                sort_image[j] = sort_image[j+1]  # switches value
+                # puts temp in second value or first in second value
+                sort_image[j+1] = temp
+
+    for i in range(file_id_total):
+        file_attributes = sort_image[i]
+        # get all file attributes from current file
+        name = file_attributes["names"]
+        liau_index = file_attributes["liau_index"]
+        liau_age = file_attributes["liau_age"]
+        liau_grade = file_attributes["liau_grade"]
+        flesch_kincaid_index = file_attributes["flesch_kincaid_index"]
+        flesch_kincaid_grade = file_attributes["flesch_kincaid_grade"]
+        gunning_fog_index = file_attributes["gunning_fog_index"]
+        gunning_fog_grade = file_attributes["gunning_fog_grade"]
+        automated_readability_index = file_attributes["automated_readability_index"]
+        automated_readability_grade = file_attributes["automated_readability_grade"]
+        words = file_attributes["words"]
+        letters = file_attributes["letters"]
+        sentences = file_attributes["sentences"]
+        syllables = file_attributes["syllables"]
+        complex_words = file_attributes["complex_words"]
+        recommended_level = file_attributes["recommended_level"]
+        # update row in table
+        db.execute("UPDATE samples SET names = ?, words = ?, letters = ?, sentences = ?, syllables = ?, complex_words = ?, liau_index = ?, liau_age = ?, liau_grade = ?, flesch_kincaid_index = ?, flesch_kincaid_grade = ?, gunning_fog_index = ?, gunning_fog_grade = ?, automated_readability_index = ?, automated_readability_grade = ?, recommended_level = ? WHERE id = ?",
+                   name, words, letters, sentences, syllables, complex_words, liau_index, liau_age, liau_grade, flesch_kincaid_index, flesch_kincaid_grade, gunning_fog_index, gunning_fog_grade, automated_readability_index, automated_readability_grade, recommended_level, i+1)
+    return jsonify(render_template("findText.html"))
+
+# Sorting
+
+
+@ app.route("/sortImageZAH", methods=["POST"])
+@ login_required
+def sort_image_desc_history():
+    file_id_total = db.execute(
+        "select seq from sqlite_sequence where name= ?", "files")
+    file_id_total = file_id_total[0]
+    file_id_total = file_id_total["seq"]
+    # Bubble Sort (Descending)
+    # Gets all data from database
+    sort_image = db.execute("SELECT * FROM files")
+    sort_image_sequences = db.execute("SELECT * FROM sequences")
+    for i in range(file_id_total):  # bubble sort loop 1
+        for j in range(file_id_total-1):  # bubble sort loop 2
+            file_1 = sort_image[j]  # gets the first row from the database
+            file_2 = sort_image[j+1]  # gets second row from database
+            # compares the value of the key "names"
+            if (file_1['file_name'] > file_2['file_name']) == False:
+                temp = sort_image[j]  # puts first value in temp variable
+                temp2 = sort_image_sequences[j]
+                sort_image[j] = sort_image[j+1]  # switches value
+                # switches value
+                sort_image_sequences[j] = sort_image_sequences[j+1]
+                # puts temp in second value or first in second value
+                sort_image[j+1] = temp
+                sort_image_sequences[j+1] = temp2
+
+    for i in range(file_id_total):
+        file_attributes = sort_image[i]
+        sequence_attributes = sort_image_sequences[i]
+        file_name = file_attributes["file_name"]
+        file_data = file_attributes["file_data"]
+        file_number = file_attributes["num"]
+        title = file_attributes["title"]
+        history_image = file_attributes["history_image"]
+        user_id = file_attributes["user_id"]
+        file_words = sequence_attributes["words"]
+        file_letters = sequence_attributes["letters"]
+        file_sentences = sequence_attributes["sentences"]
+        file_syllables = sequence_attributes["syllables"]
+        file_complex_words = sequence_attributes["complex_words"]
+        file_liau_index = sequence_attributes["liau_index"]
+        file_liau_age = sequence_attributes["liau_age"]
+        file_liau_grade = sequence_attributes["liau_grade"]
+        file_flesch_kincaid_index = sequence_attributes["flesch_kincaid_index"]
+        file_flesch_kincaid_grade = sequence_attributes["flesch_kincaid_grade"]
+        file_gunning_fog_index = sequence_attributes["gunning_fog_index"]
+        file_gunning_fog_grade = sequence_attributes["gunning_fog_grade"]
+        file_automated_readability_index = sequence_attributes["automated_readability_index"]
+        file_automated_readability_grade = sequence_attributes["automated_readability_grade"]
+        file_recommended_level = sequence_attributes["recommended_level"]
+        file_id = sequence_attributes["file_id"]
+        db.execute("UPDATE sequences SET words = ?, letters = ?, sentences = ?, syllables = ?, complex_words = ?, liau_index = ?, liau_age = ?, liau_grade = ?, flesch_kincaid_index = ?, flesch_kincaid_grade = ?, gunning_fog_index = ?, gunning_fog_grade = ?, automated_readability_index = ?, automated_readability_grade = ?, recommended_level = ?, file_id = ? WHERE id = ?",
+                   file_words, file_letters, file_sentences, file_syllables, file_complex_words, file_liau_index, file_liau_age, file_liau_grade, file_flesch_kincaid_index, file_flesch_kincaid_grade, file_gunning_fog_index, file_gunning_fog_grade, file_automated_readability_index, file_automated_readability_grade, file_recommended_level, file_id, i+1)
+        db.execute("UPDATE files SET file_name = ?, file_data = ?, title = ?, history_image = ?, num = ?, user_id = ? WHERE id = ?",
+                   file_name, file_data, title, history_image, file_number, user_id, i+1)
+    return jsonify(render_template("history.html"))
+
+
+@ app.route("/sortImageAZH", methods=["POST"])
+@ login_required
+def sort_image_history():
+    file_id_total = db.execute(
+        "select seq from sqlite_sequence where name= ?", "files")
+    file_id_total = file_id_total[0]
+    file_id_total = file_id_total["seq"]
+    # Bubble Sort (Ascending)
+    # Gets all data from database
+    sort_image = db.execute("SELECT * FROM files")
+    sort_image_sequences = db.execute("SELECT * FROM sequences")
+    for i in range(file_id_total):  # bubble sort loop 1
+        for j in range(file_id_total-1):  # bubble sort loop 2
+            file_1 = sort_image[j]  # gets the first row from the database
+            file_2 = sort_image[j+1]  # gets second row from database
+            # compares the value of the key "names"
+            if (file_1['file_name'] > file_2['file_name']) == True:
+                temp = sort_image[j]  # puts first value in temp variable
+                temp2 = sort_image_sequences[j]
+                sort_image[j] = sort_image[j+1]  # switches value
+                # switches value
+                sort_image_sequences[j] = sort_image_sequences[j+1]
+                # puts temp in second value or first in second value
+                sort_image[j+1] = temp
+                sort_image_sequences[j+1] = temp2
+
+    for i in range(file_id_total):
+        # get all file attributes
+        file_attributes = sort_image[i]
+        sequence_attributes = sort_image_sequences[i]
+        file_name = file_attributes["file_name"]
+        file_data = file_attributes["file_data"]
+        file_number = file_attributes["num"]
+        title = file_attributes["title"]
+        history_image = file_attributes["history_image"]
+        user_id = file_attributes["user_id"]
+        # update table
+        file_words = sequence_attributes["words"]
+        file_letters = sequence_attributes["letters"]
+        file_sentences = sequence_attributes["sentences"]
+        file_syllables = sequence_attributes["syllables"]
+        file_complex_words = sequence_attributes["complex_words"]
+        file_liau_index = sequence_attributes["liau_index"]
+        file_liau_age = sequence_attributes["liau_age"]
+        file_liau_grade = sequence_attributes["liau_grade"]
+        file_flesch_kincaid_index = sequence_attributes["flesch_kincaid_index"]
+        file_flesch_kincaid_grade = sequence_attributes["flesch_kincaid_grade"]
+        file_gunning_fog_index = sequence_attributes["gunning_fog_index"]
+        file_gunning_fog_grade = sequence_attributes["gunning_fog_grade"]
+        file_automated_readability_index = sequence_attributes["automated_readability_index"]
+        file_automated_readability_grade = sequence_attributes["automated_readability_grade"]
+        file_recommended_level = sequence_attributes["recommended_level"]
+        file_id = sequence_attributes["file_id"]
+        db.execute("UPDATE sequences SET words = ?, letters = ?, sentences = ?, syllables = ?, complex_words = ?, liau_index = ?, liau_age = ?, liau_grade = ?, flesch_kincaid_index = ?, flesch_kincaid_grade = ?, gunning_fog_index = ?, gunning_fog_grade = ?, automated_readability_index = ?, automated_readability_grade = ?, recommended_level = ?, file_id = ? WHERE id = ?",
+                   file_words, file_letters, file_sentences, file_syllables, file_complex_words, file_liau_index, file_liau_age, file_liau_grade, file_flesch_kincaid_index, file_flesch_kincaid_grade, file_gunning_fog_index, file_gunning_fog_grade, file_automated_readability_index, file_automated_readability_grade, file_recommended_level, file_id, i+1)
+        db.execute("UPDATE files SET file_name = ?, file_data = ?, title = ?, history_image = ?, num = ?, user_id = ? WHERE id = ?",
+                   file_name, file_data, title, history_image, file_number, user_id, i+1)
+    return jsonify(render_template("history.html"))
 
 
 @ app.route("/history", methods=["GET", "POST"])
@@ -743,8 +991,12 @@ def history_scope():
         return redirect("/history")
     history_image_scope_id = int(request.get_json())  # get image id
     # get file name
+    file_number = db.execute(
+        "SELECT num FROM files where id = ?", history_image_scope_id)
+    file_number = file_number[0]
+    file_number = file_number["num"]
     file_name = db.execute(
-        "SELECT file_name FROM files where id = ?", history_image_scope_id)
+        "SELECT file_name FROM files where num = ?", file_number)
     file_name = file_name[0]
     file_name = file_name["file_name"]
     if file_name.endswith(".txt"):
@@ -752,7 +1004,7 @@ def history_scope():
         file_name = file_name[0].upper()
     # get file values
     file_attributes = db.execute(
-        "SELECT * FROM sequences WHERE file_id = ?", history_image_scope_id)
+        "SELECT * FROM sequences WHERE file_id = ?", file_number)
     # split file attributes into different variables
     file_attributes = file_attributes[0]
     liau_index = file_attributes["liau_index"]

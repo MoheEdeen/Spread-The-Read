@@ -201,3 +201,53 @@ h4{
     transform: translate(-50%, 0%);
     color: #003e57;
 }
+
+.sort_container{
+    width: 200px;
+    position: relative;
+    left: 40%;
+}
+
+.sort{
+    background-color: #77ACF1;
+}
+
+.sort:hover{
+    background-color: #3e6eac;
+    cursor: pointer;
+}
+
+.sort,.sort_type{
+    padding: 12px;
+    font-size: 1.2em;
+    font-family: "Montserrate", sans-serif;
+    border: none;
+    outline: none;
+    width: 200px;
+    color: #fff;
+    transition: 0.3s;
+}
+
+.sort_list{
+    position: absolute;
+    transform: scaleY(0);
+    transition: 0.3s;
+    transform-origin: top;
+}
+
+.new_sorted_list{
+    transform: scaleY(1)
+}
+
+.sort_type{
+    background-color: #41AEA9
+}
+
+.sort_type:hover{
+    transform: scale(1.1);
+    background-color: #A6F6F1;
+    cursor: pointer;
+}
+
+
+

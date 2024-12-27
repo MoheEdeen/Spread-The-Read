@@ -5,7 +5,7 @@
     <link rel="shortcut icon" type="image/png" href="static/Assets/favicon-32x32.png">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title> Readable </title>
+    <title> Spread the Read </title>
     <link rel="stylesheet" href="static/history.css">
     <!-- Animation library --> 
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
@@ -24,24 +24,31 @@
             <li><a href="logout">Logout</a></li>
         </ul>
     </header>
+
     <section data-aos = "slide-up">
-        <div class = "container">
-            <table>
-                <tr>
-                <th colspan="5" style = "font-size: 50px;">Find Text</th>
-                </tr>
-                <tr>
-                        <td><input type = "image" src="static/find_text_imgs/Animal Farm.png" id = "1" name = "history_button" alt="" border="3" height="300" width="300" onclick="get_button_id(this.id)"></td>                                        
-                        <td><input type = "image" src="static/find_text_imgs/Of Mice and Men.png" id = "2" name = "history_button" alt="" border="3" height="300" width="300" onclick="get_button_id(this.id)"></td>                                        
-                        <td><input type = "image" src="static/find_text_imgs/A Doll's House.png" id = "3" name = "history_button" alt="" border="3" height="300" width="300" onclick="get_button_id(this.id)"></td>                                        
-                        <td><input type = "image" src="static/find_text_imgs/The Great Gatsby.png" id = "4" name = "history_button" alt="" border="3" height="300" width="300" onclick="get_button_id(this.id)"></td>                                        
-                        <td><input type = "image" src="static/find_text_imgs/Things Fall Apart.png" id = "5" name = "history_button" alt="" border="3" height="300" width="300" onclick="get_button_id(this.id)"></td>                                        
-                        <td><input type = "image" src="static/find_text_imgs/Harry Potter and the Order of the Phoenix.png" id = "6" name = "history_button" alt="" border="3" height="300" width="300" onclick="get_button_id(this.id)"></td>                                        
-                        <td><input type = "image" src="static/find_text_imgs/Lord of the Flies.png" name = "history_button" id = "7" alt="" border="3" height="300" width="300" onclick="get_button_id(this.id)"></td>                                        
-                        
-                </tr>
-            </table>
+        <div class = "sort_container">
+            
+            <button class = "sort">Sort By:</button>
+            <div class = "sort_list">
+                <button class = "sort_type" id = "option1">Letters: A-Z</button>
+                <button class = "sort_type" id = "option2">Letters: Z-A</button>
+            </div>
         </div>
+
+        
+
+    <div class = "container">
+        <table>
+            <th>
+                <h1 style = "font-size: 50px;">Find Text</h1>
+            </th>
+            <tr>
+                {% for name, id in file_names %}
+                    <td><input type = "image" src = "static/find_text_imgs/{{ name }}.png" id = "{{ id }}" name = "history_button" alt = "" border="3" height="300" width="300" onclick="get_button_id(this.id)" ></td>
+                {% endfor %}
+            </tr>
+        </table>
+    </div>
     </section>
     <!-- Libraries -->
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
@@ -69,5 +76,45 @@
             })
         }
     </script>
+    <script>
+        let sort = document.querySelector(".sort");
+        let sort_list = document.querySelector(".sort_list");
+        sort.addEventListener("click",()=>{
+            sort_list.classList.toggle("new_sorted_list");
+        });
+        let option1 = document.getElementById("option1");
+        let option2 = document.getElementById("option2");
+        option1.addEventListener("click",()=>{
+            $.ajax({
+                // Sends to flask file a POST request to the function "/sortImageAZ" with the data of the id of the button.
+                type: "POST",
+                url: "/sortImageAZ",
+                data: JSON.stringify(option1),
+                contentType: "application/json",
+                dataType: "json",
+                success:function(response){ 
+                    document.write(response); 
+                    window.location.reload();
+                }       
+            })
+            
+        })
+        option2.addEventListener("click",()=>{
+            $.ajax({
+                // Sends to flask file a POST request to the function "/sortImageZA" with the data of the id of the button.
+                type: "POST",
+                url: "/sortImageZA",
+                data: JSON.stringify(option1),
+                contentType: "application/json",
+                dataType: "json",
+                success:function(response){ 
+                    document.write(response); 
+                    window.location.reload();
+                }       
+            })
+            
+        })
+    </script>
+
 </body>
 </html>
